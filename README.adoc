@@ -2,3 +2,7 @@
 
 == Alpine Theia
 
+[source,bash]
+----
+eval `ssh-agent -s`
+----
