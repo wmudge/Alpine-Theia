@@ -2,9 +2,10 @@ FROM alpine:latest
 
 EXPOSE 3000
 
-RUN addgroup -S theia && adduser -S theia -G theia
+RUN addgroup -S theia && \
+    adduser -S theia -G theia &&
+    mkdir /theia-ide
 
-MKDIR /theia-ide
 COPY theia-package.json /theia-ide/package.json
 COPY theia-bootstrap.sh /theia-ide/bootstrap.sh
 WORKDIR /theia-ide
