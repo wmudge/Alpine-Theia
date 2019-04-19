@@ -1,21 +1,23 @@
-FROM alpine:latest
+FROM node:alpine
 
 EXPOSE 3000
 
 RUN addgroup -S theia && \
-    adduser -S theia -G theia &&
+    adduser -S theia -G theia && \
     mkdir /theia-ide
 
 COPY theia-package.json /theia-ide/package.json
 COPY theia-bootstrap.sh /theia-ide/bootstrap.sh
 WORKDIR /theia-ide
 
-RUN apk add --no-cache make gcc g++ python2 openssh git asciidoctor nodejs npm && \
+RUN apk add --no-cache make gcc g++ openssh-client git asciidoctor && \
     npm install -g yarn && \
     yarn && \
     yarn theia build && \
-    apk del make gcc g++ python2 && \
-    chmod u+x bootstrap.sh
+    apk del make gcc g++ && \
+		rm -Rf /var/cache/apk/* && \
+		npm cache verify && \
+    chmod 755 bootstrap.sh
 
 USER theia
 
