@@ -27,7 +27,9 @@ Run as above in <<Run It!>>
 
 === Setting up Git
 
-You will need to either create or add an existing SSH key within the image for connecting to GitHub (or other Git services). The image contains `openssh-client`, so you can use `ssh-keygen` in a Terminal to create a new key. 
+You will need to either create or add an existing SSH key within the image for connecting to GitHub (or other Git services). The image contains `openssh-client`, so you can use `ssh-keygen` in a Terminal to create a new key.
+
+The image also has `ssh-agent` set to run prior to the Theia server execution, so you can add your key to the agent with `ssh-add` from a Terminal.
 
 You will also need to set your Git credentials in a Terminal:
 
