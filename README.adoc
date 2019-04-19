@@ -41,7 +41,7 @@ Once you have done both, you should commit these changes to your image. See <<Co
 
 === Update the Shell
 
-The Alpine installation is pretty barebones, so you might want to add more packages. Check out the (https://pkgs.alpinelinux.org/packages?name=&branch=edge)[Alpine Package] search page.
+The Alpine installation is pretty barebones, so you might want to add more packages. Check out the [https://pkgs.alpinelinux.org/packages?name=&branch=edge](Alpine Package) search page.
 
 === Commit Changes
 
