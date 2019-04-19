@@ -22,7 +22,8 @@
     "@theia/extension-manager": "next",
     "@theia/editorconfig": "next",
     "@theia/plugin-ext-vscode": "next",
-    "@theia/asciidoc": "next"
+    "@theia/asciidoc": "next",
+		"font-awesome": "latest"
   },
   "devDependencies": {
     "@theia/cli": "next"

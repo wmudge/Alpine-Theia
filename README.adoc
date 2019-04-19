@@ -1,8 +1,55 @@
 = Alpine Theia
+An opiniated Alpine Linux-based Theia installation
 
 == Alpine Theia
 
+An opinionated build of the Theia IDE running on Alpine Linux.  This particular instance is designed to develop NodeJS projects. In addition, the build assumes that you will persist all your work externally in a Git project. That is, the image does not mount any local volumes.
+
+=== Run It!
+
 [source,bash]
 ----
-eval `ssh-agent -s`
+docker run -p 3000 -d wmudge/alpine-theia-nodejs
 ----
+
+And then open the mapped 3000 port with your favorite browser, i.e. `docker ps`.
+
+=== Build Your Own
+
+To build your own Theia version, first clone and then edit the `theia-package.json` file to include the appropriate Theia packages. Then build the Docker image:
+
+[source,bash]
+----
+docker build -t <your image name> Alpine-Theia
+----
+
+Run as above in <<Run It!>>
+
+=== Setting up Git
+
+You will need to either create or add an existing SSH key within the image for connecting to GitHub (or other Git services). The image contains `openssh-client`, so you can use `ssh-keygen` in a Terminal to create a new key. 
+
+You will also need to set your Git credentials in a Terminal:
+
+[source,bash]
+----
+git config --global user.name <your name>
+git config --global user.email <your email>
+----
+
+Once you have done both, you should commit these changes to your image. See <<Commit Changes>>.
+
+=== Update the Shell
+
+The Alpine installation is pretty barebones, so you might want to add more packages. Check out the (https://pkgs.alpinelinux.org/packages?name=&branch=edge)[Alpine Package] search page.
+
+=== Commit Changes
+
+Any changes you have made to your image, such as git configuration updates, SSH keys, or package managements, you will need to update the image. Simply execute the following:
+
+[source,bash]
+----
+docker commit <container id>
+----
+
+Note that local storage will be destroyed if the image is stopped (but not paused), so take appropriate actions to save your work if you don't push to a Git project.
