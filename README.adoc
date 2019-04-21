@@ -25,6 +25,18 @@ docker build -t <your image name> Alpine-Theia
 
 Run as above in <<Run It!>>
 
+==== Building on Windows 10
+
+I had some trouble building the image on Win10. I had to make the following adjustments:
+
+# I had to turn off the CRLF conversion then cloning the repo. The Windows line termination characters were copied to the Alpine container from the Windows host, and thus the bootstrap script would not execute properly.
+# Node was running out of memory, so I had to add the following before the main `RUN` directive in the Dockerfile:
+
+[source, dockerfile]
+----
+ENV NODE_OPTIONS=--max-old-space-size=2048
+----
+
 === Setting up Git
 
 You will need to either create or add an existing SSH key within the image for connecting to GitHub (or other Git services). The image contains `openssh-client`, so you can use `ssh-keygen` in a Terminal to create a new key.
