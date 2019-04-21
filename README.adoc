@@ -27,10 +27,16 @@ Run as above in <<Run It!>>
 
 ==== Building on Windows 10
 
-I had some trouble building the image on Win10. I had to make the following adjustments:
+I had some trouble building the image on Win10. I had to make the following adjustments.
 
-# I had to turn off the CRLF conversion then cloning the repo. The Windows line termination characters were copied to the Alpine container from the Windows host, and thus the bootstrap script would not execute properly.
-# Node was running out of memory, so I had to add the following before the main `RUN` directive in the Dockerfile:
+I had to turn off the CRLF conversion when cloning the repo. The Windows line termination characters were copied to the Alpine container from the Windows host, and thus the bootstrap script would not execute properly.
+
+[source,bash]
+----
+git --config auto.crlf=false git@github.com:wmudge/Alpine-Theia.git
+----
+
+Node was running out of memory, so I had to add the following before the main `RUN` directive in the Dockerfile:
 
 [source, dockerfile]
 ----
