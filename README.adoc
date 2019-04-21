@@ -9,7 +9,7 @@ An opinionated build of the Theia IDE running on Alpine Linux.  This particular 
 
 [source,bash]
 ----
-docker run -p 3000 -d wmudge/alpine-theia-nodejs
+docker run -p 3000 -d --init wmudge/alpine-theia-nodejs
 ----
 
 And then open the mapped 3000 port with your favorite browser, i.e. `docker ps`.
