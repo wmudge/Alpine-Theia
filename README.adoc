@@ -9,10 +9,10 @@ An opinionated build of the Theia IDE running on Alpine Linux.  This particular 
 
 [source,bash]
 ----
-docker run -p 3000 -d --init wmudge/alpine-theia-nodejs
+docker run -p 3000:3000 -d --init --mount type=bind,source=<YOUR PROJECT DIR>,target=/home/project --mount type=bind,source=<YOUR SSH KEYS DIR>,target=/home/ssh-keys,readonly wmudge/alpine-theia-nodejs
 ----
 
-And then open the mapped 3000 port with your favorite browser, i.e. `docker ps`.
+And then open `http://localhost:3000` in your favorite browser.
 
 === Build Your Own
 
@@ -47,7 +47,7 @@ ENV NODE_OPTIONS=--max-old-space-size=2048
 
 You will need to either create or add an existing SSH key within the image for connecting to GitHub (or other Git services). The image contains `openssh-client`, so you can use `ssh-keygen` in a Terminal to create a new key.
 
-The image also has `ssh-agent` set to run prior to the Theia server execution, so you can add your key to the agent with `ssh-add` from a Terminal.
+The image also has `ssh-agent` set to run prior to the Theia server execution, so you can add your key to the agent with `ssh-add` from a Terminal. If you use the `/home/ssh-keys` bind point, you can use your host's SSH keys.
 
 You will also need to set your Git credentials in a Terminal:
 
@@ -72,4 +72,4 @@ Any changes you have made to your image, such as git configuration updates, SSH 
 docker commit <container id>
 ----
 
-Note that local storage will be destroyed if the image is stopped (but not paused), so take appropriate actions to save your work if you don't push to a Git project.
+Note that local storage will be destroyed if the image is stopped (but not paused), so take appropriate actions to save your work if you don't push to a Git project or store it on the host via the bind mounts.
